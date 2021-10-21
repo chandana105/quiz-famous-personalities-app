@@ -1,13 +1,19 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card {
+  @apply flex  w-80  max-h-96  bg-white relative cursor-pointer;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.overlay {
+  @apply absolute top-0 h-full w-full  bg-black bg-opacity-60  text-white text-2xl flex justify-center items-center  rounded-2xl;
+}
+
+.choice-btn {
+  @apply px-2  py-2  rounded-lg border-solid border-2 tracking-wider text-lg;
+}
+
+.modal-btn {
+  @apply bg-primary px-2  py-2 rounded-lg    tracking-wider text-lg;
 }
