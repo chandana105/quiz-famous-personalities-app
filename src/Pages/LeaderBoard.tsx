@@ -1,12 +1,8 @@
 import React from "react";
-import Modal from "../Components/Modal";
-import NameModal from "../Components/NameModal";
 
 const LeaderBoard = () => {
   return (
     <>
-      <Modal />
-      <NameModal />
       <table
         className="table-auto mx-auto mt-5  uppercase font-mono text-xl"
         role="table"
