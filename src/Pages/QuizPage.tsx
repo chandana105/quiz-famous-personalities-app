@@ -28,6 +28,10 @@ const QuizPage = () => {
         const response = await quizApi.getQuiz(`${BASE_URL}/quiz/${quizId}`);
         if ("quiz" in response) {
           setQuizData(response.quiz);
+          dispatch({
+            type: "SET_QUIZ_NAME",
+            payload: { quizName: response.quiz.quizName },
+          });
         }
       } catch (err) {
         console.log(err, "err");
@@ -36,9 +40,9 @@ const QuizPage = () => {
     })();
   }, [dispatch, quizId]);
 
-  const handleNext = (quizName: string | undefined) => {
+  const handleNext = () => {
     if (currentQuestion >= 9) {
-      navigate("/result", { state: { name: quizName } });
+      navigate("/result");
     } else {
       dispatch({
         type: "NEXT_QUESTION",
@@ -141,7 +145,7 @@ const QuizPage = () => {
                 </button>
                 <button
                   className="px-4  py-2 rounded-lg border-solid border-2  border-light-blue-500 tracking-wider text-lg uppercase hover:bg-green-500 "
-                  onClick={() => handleNext(quizData?.quizName)}
+                  onClick={handleNext}
                 >
                   Next
                 </button>
@@ -155,15 +159,3 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
-
-// if i will put map here ki quizdata.quetions.map toh humein sare 10 questions ek hi sath milajyenge with their options, that we dontwant, instead we wan ki at a time ek question show ho, on next next quest shouldbe shown
-
-// {quizData?.questions[currentQuestion].questionNo}
-// quiz ke quesiosn array works like from if length is 10 then it ll be 0-9 toh questions[0].questionno ie pehle question ka questionno, if humeni curentquestino leliya on that var base
-
-// onlast ques whether right or wrong : on next only shoyl be shown resutls pg
-// agr selected option is rgiht then uski bg-red if its wrong toh selecopt - bg-red and there only show green on whcih is right ie ki on just onr click on any ofoptions have to show what is rt or wrong
-
-// now pehle se clicked = false, agr option click hua thenturn to true and and inc score, toh next pr = cliked false , reset pr bhi cliekd false
-
-// selecteoption : [id, opton, isright] to send this , agr selectedoption.isright= true,toh if selecedoption._id === choice._id then green elese show red toh bg color of that btn = greeen, and green = choice.isroght = green

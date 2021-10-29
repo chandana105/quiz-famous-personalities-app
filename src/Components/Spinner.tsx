@@ -10,5 +10,3 @@ const Spinner = ( ) => {
 
 export default Spinner;
 
-
-// type="CradleLoader" Plane Puff"TailSpin" Triangle Watch

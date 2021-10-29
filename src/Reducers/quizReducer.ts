@@ -31,6 +31,16 @@ const quizReducer = (state: initialStateType, action: QuizActionType) => {
         currentQuestion: 0,
         currentScore: 0,
       };
+    case "SET_QUIZ_NAME":
+      return {
+        ...state,
+        currentQuiz: action.payload.quizName,
+      };
+    case "ADD_TO_LEADERBOARD":
+      return {
+        ...state,
+        leaderBoard: action.payload.leaderBoard,
+      };
     default:
       return state;
   }

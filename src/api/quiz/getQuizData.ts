@@ -10,11 +10,10 @@ type ServerResponse = {
   quizzes: Quiz[];
 };
 
-type ServerError = {
+export type ServerError = {
   success: boolean;
   message: string;
   errorMessage: string;
-  // ??
 };
 
 export const getAllQuiz = async () => {

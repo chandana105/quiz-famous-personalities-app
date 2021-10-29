@@ -17,7 +17,14 @@ export type Question = {
 };
 
 export type Quiz = {
-  _id : string,
+  _id: string;
   quizName: string;
   questions: Question[];
+};
+
+export type LeaderBoard = {
+  _id: string;
+  playerName: string;
+  quizName: string;
+  score: number;
 };

@@ -1,4 +1,6 @@
 import { Quiz } from "./quiz.types";
+import {LeaderBoard} from './quiz.types'
+
 
 export type initialStateType = {
   loading: boolean;
@@ -6,4 +8,6 @@ export type initialStateType = {
   playerName: string;
   currentQuestion: number;
   currentScore: number;
+  currentQuiz : string;
+  leaderBoard : LeaderBoard[]
 };

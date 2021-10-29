@@ -1,6 +1,63 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useQuizprovider } from "../Contexts/QuizProvider";
+import axios, { AxiosError } from "axios";
+import { BASE_URL } from "../api/helper";
+import { LeaderBoard } from "../types/quiz.types";
+import { ServerError } from "../api/quiz/getQuizData";
+import Spinner from "../Components/Spinner";
 
-const LeaderBoard = () => {
+const url = `${BASE_URL}/leaderBoard`;
+
+type ServerResponse = {
+  success: boolean;
+  leaderBoard: LeaderBoard;
+};
+
+const LeaderBoardPage = () => {
+  const {
+    state: { leaderBoard, loading },
+    dispatch,
+  } = useQuizprovider();
+
+  useEffect(() => {
+    (async () => {
+      dispatch({ type: " SET_LOADING" });
+      try {
+        const response = await axios.get<ServerResponse>(url);
+        if (response.status === 200) {
+          dispatch({
+            type: "ADD_TO_LEADERBOARD",
+            payload: { leaderBoard: response.data.leaderBoard },
+          });
+        }
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          const serverError = error as AxiosError<ServerError>;
+          if (serverError && serverError.response) {
+            return serverError.response.data;
+          }
+        }
+        console.log(error);
+        return {
+          success: false,
+          message: "Error while getting the quiz data",
+          errorMessage: "Something went wrong!",
+        };
+      }
+      dispatch({ type: " SET_LOADING" });
+    })();
+  }, [dispatch]);
+
+  const sortedLeaderBoard = leaderBoard.sort((a, b) => b.score - a.score);
+
+  if (loading) {
+    return (
+      <div className="container mt-32  flex flex-col flex-wrap justify-center items-center  py-9 my-auto text-center font-mono ">
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <>
       <table
@@ -12,31 +69,26 @@ const LeaderBoard = () => {
             className=" text-center  border-b-4  border-black text-blue-600 "
             role="row"
           >
-            <th className="px-20 py-2">Name</th>
+            <th className="px-20 py-2">PlayerName</th>
             <th className="px-20 py-2">Quiz</th>
             <th className="px-20 py-2">Score</th>
           </tr>
         </thead>
         <tbody>
-          <tr className=" border-b-4  border-black  text-center ">
-            <td className="px-20 py-2">Chandana</td>
-            <td className="px-20 py-2">APJ ABDUL KALAM</td>
-            <td className="px-20 py-2">16</td>
-          </tr>
-          <tr className="border-b-4  border-black text-center ">
-            <td className="px-20 py-2">Sanjana</td>
-            <td className="px-20 py-2">SWAMI VIVEKANANDA</td>
-            <td className="px-20 py-2">50</td>
-          </tr>
-          <tr className="border-b-4  border-black  text-center  ">
-            <td className="px-20 py-2 ">Sita</td>
-            <td className="px-20 py-2"> SRINIVASA RAMANUJAN</td>
-            <td className="px-20 py-2 ">20</td>
-          </tr>
+          {sortedLeaderBoard.map((enteries) => (
+            <tr
+              className=" border-b-4  border-black  text-center "
+              key={enteries._id}
+            >
+              <td className="px-20 py-2">{enteries.playerName}</td>
+              <td className="px-20 py-2">{enteries.quizName}</td>
+              <td className="px-20 py-2">{enteries.score}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
   );
 };
 
-export default LeaderBoard;
+export default LeaderBoardPage;

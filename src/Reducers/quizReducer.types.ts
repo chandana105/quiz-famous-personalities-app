@@ -1,4 +1,5 @@
 import { Quiz } from "../types/quiz.types";
+import { LeaderBoard } from "../types/quiz.types";
 
 export type QuizActionType =
   | {
@@ -21,4 +22,12 @@ export type QuizActionType =
   | {
       type: "INCREASE_SCORE";
       payload: { points: number };
+    }
+  | {
+      type: "SET_QUIZ_NAME";
+      payload: { quizName: string };
+    }
+  | {
+      type: "ADD_TO_LEADERBOARD";
+      payload: { leaderBoard: LeaderBoard[] };
     };

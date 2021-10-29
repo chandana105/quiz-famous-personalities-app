@@ -11,6 +11,8 @@ export const initialState = {
   playerName: "",
   currentQuestion: 0,
   currentScore: 0,
+  currentQuiz : '',
+  leaderBoard : []
 };
 
 const QuizContext = createContext<{
