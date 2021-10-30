@@ -19,10 +19,8 @@ Quizzy-Quiz Application is a quiz app made on famous personalities. There are 3 
 - Tailwind CSS
 
 ## Features
-**1. Select from 3 quizzes**
+ - **Select from 3 quizzes**
+ - **Quizzes are loaded from the database**
+ - **Save your scores on to the leaderboard**
+ - **Leaderboard is accessible to everyone** 
 
-**2. Quizzes are loaded from the database**
-
-**3. Save your scores on to the leaderboard**
-
-**4. Leaderboard is accessible to everyone**
