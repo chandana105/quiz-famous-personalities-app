@@ -64,4 +64,3 @@ const Home = () => {
 
 export default Home;
 
-// link to /quiz/id will be on start button of second modal

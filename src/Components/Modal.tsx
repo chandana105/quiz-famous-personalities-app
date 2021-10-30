@@ -33,10 +33,6 @@ const Modal = (props: ModalProps) => {
         showNameModal={showNameModal}
         handleCloseNameModal={() => {
           setShowNameModal(false);
-          // dispatch({
-          //   type: "SET_PLAYER_NAME",
-          //   payload: { playerName: "" },
-          // });
         }}
       />
       <div
@@ -63,10 +59,11 @@ const Modal = (props: ModalProps) => {
         <div className=" p-4 border-t-2 border-b-2 border-black-100 flex flex-col">
           <h1 className=" font-bold text-2xl">Description</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem enim quibusdam eveniet provident pariatur adipisci
-            minima quo, obcaecati ab recusandae nihil odit autem aspernatur
-            sequi. Quas placeat obcaecati ea voluptatibus!
+            {currentQuiz?.quizName === "A. P. J. ABDUL KALAM"
+              ? "Dr APJ Abdul Kalam was a significant believer of 'Simple Living High Thinking'. Sir Abdul Kalam has faced numerous problems throughout his life. His youth was full of struggles, and he wanted to become a fighter pilot.He was determined on his hard work and dedication and he ultimately became a renowned scientist of India. His life is an inspiration for us."
+              : currentQuiz?.quizName === "SWAMI VIVEKANANDA"
+              ? "Swami Vivekananda was a spiritual leader and social reformer. His lectures, writings, letters, poems, ideas motivated not only the youth of India but also the whole world. He is the founder of Ramakrishna Mission and Belur Math in Calcutta, which are still working towards helping the needy. He was a man of wisdom and a very simple human being.  He laid the true foundations of India's unity as a nation. He taught us how to live together with so many diversities. “Take up one idea, make that one idea your life, think of it, dream of it, let the brain, muscles, nerves, every part of your body be full of that idea, and just leave every other idea alone. This is the way to success.” Swami Vivekananda"
+              : "Srinivasa Ramanujan lived just for 32 years but during this short span he produced such theorems and formulae which even today remain unfathomable in the present age of super computers. He left behind him about 4000 formulae and theorems. Ramanujan was deeply religious and united spirituality and mathematics. For him the zero represented the Absolute Reality. Researchers are still struggling to understand the source of his remarkable genius in mathematics.Srinivasa Ramanujan is a man whose contributions to the field of mathematics are unmatchable. Furthermore, experts in mathematics worldwide all recognize his tremendous worth. Most noteworthy, Srinivasa Ramanujan made his country proud at a time when India was still under British occupation."}
           </p>
           <h2 className="mt-3 font-bold text-xl ">Rules:</h2>
           <ul className="list-disc px-8">
@@ -87,7 +84,3 @@ const Modal = (props: ModalProps) => {
 };
 
 export default Modal;
-
-// home pr humen quizmodel open rkna bydefautl its false, toh showmodal = false, toh in context,
-// vaise toh we just want it in usestate for that pg only , toh usestate..
-// toh ab modal comp mein kya aayega vo idhar likhan:- it ll gt the id of the quiz on whcoh modal was open, then shoemodal

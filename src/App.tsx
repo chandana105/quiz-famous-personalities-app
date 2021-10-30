@@ -6,7 +6,7 @@ import Quiz from "./Pages/QuizPage";
 import LeaderBoard from "./Pages/LeaderBoard";
 import Result from "./Pages/Result";
 import { ToastContainer } from "react-toastify";
-
+import NotFound from "./Pages/NotFound";
 
 function App() {
   return (
@@ -17,13 +17,12 @@ function App() {
         <Route path="/quiz/:quizId" element={<Quiz />} />
         <Route path="/result" element={<Result />} />
         <Route path="/leaderboard" element={<LeaderBoard />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
-      {/* 404   ,,types export one file , consoel and coments remove*/}
+      {/* {/* quiz description } */}
       <ToastContainer />
-
     </>
   );
 }
 
 export default App;
-

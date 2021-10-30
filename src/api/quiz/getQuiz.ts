@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { Quiz } from "../../types/quiz.types";
-import {ServerError} from './getQuizData'
+import { ServerError } from "./getQuizData";
 
 type ServerResponse = {
   success: boolean;
