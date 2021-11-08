@@ -25,12 +25,6 @@ const quizReducer = (state: initialStateType, action: QuizActionType) => {
         ...state,
         currentScore: state.currentScore + action.payload.points,
       };
-    case "RESET":
-      return {
-        ...state,
-        currentQuestion: 0,
-        currentScore: 0,
-      };
     case "SET_QUIZ_NAME":
       return {
         ...state,
@@ -40,6 +34,12 @@ const quizReducer = (state: initialStateType, action: QuizActionType) => {
       return {
         ...state,
         leaderBoard: action.payload.leaderBoard,
+      };
+    case "RESET":
+      return {
+        ...state,
+        currentQuestion: 0,
+        currentScore: 0,
       };
     default:
       return state;

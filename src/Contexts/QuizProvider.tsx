@@ -5,7 +5,7 @@ import { initialStateType } from "../types/quizInitial.types";
 import quizReducer from "../Reducers/quizReducer";
 import * as quizApi from "../api/quiz/getQuizData";
 
-export const initialState = {
+export const initialState : initialStateType = {
   loading: false,
   quizzes: [],
   playerName: "",

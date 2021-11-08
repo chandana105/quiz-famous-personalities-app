@@ -11,6 +11,7 @@ import Spinner from "../Components/Spinner";
 
 type QuizData = Quiz;
 
+
 const QuizPage = () => {
   const { quizId } = useParams();
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const QuizPage = () => {
     dispatch,
   } = useQuizprovider();
   const [isOptionClicked, setIsOptionClicked] = useState<boolean>(false);
+
 
   useEffect(() => {
     (async () => {

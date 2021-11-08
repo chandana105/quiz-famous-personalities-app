@@ -2,18 +2,11 @@ import quizLogo from "../assets/quizLogo.svg";
 import { useQuizprovider } from "../Contexts/QuizProvider";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosError } from "axios";
-import { LeaderBoard } from "../types/quiz.types";
 import { BASE_URL } from "../api/helper";
-import { ServerError } from "../api/quiz/getQuizData";
 import { Toast } from "../Components/Toast";
+import * as finalResults from "../api/result/saveResult";
 
 const url = `${BASE_URL}/leaderBoard`;
-
-type ServerResponse = {
-  success: boolean;
-  NewLeaderBoardEntry: LeaderBoard;
-};
 
 const Result = () => {
   const {
@@ -25,27 +18,16 @@ const Result = () => {
   const saveResult = async () => {
     dispatch({ type: "SET_LOADING" });
     try {
-      const response = await axios.post<ServerResponse>(url, {
+      const data = await finalResults.saveResult(url, {
         playerName: playerName,
         quizName: currentQuiz,
         score: currentScore,
       });
-      if (response.status === 200) {
+      if ("NewLeaderBoardEntry" in data) {
         Toast("Score got Saved!");
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const serverError = error as AxiosError<ServerError>;
-        if (serverError && serverError.response) {
-          return serverError.response.data;
-        }
-      }
       console.log(error);
-      return {
-        success: false,
-        message: "Error while getting the quiz data",
-        errorMessage: "Something went wrong!",
-      };
     }
     dispatch({ type: "SET_LOADING" });
   };

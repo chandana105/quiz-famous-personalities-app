@@ -1,17 +1,10 @@
 import React, { useEffect } from "react";
 import { useQuizprovider } from "../Contexts/QuizProvider";
-import axios, { AxiosError } from "axios";
 import { BASE_URL } from "../api/helper";
-import { LeaderBoard } from "../types/quiz.types";
-import { ServerError } from "../api/quiz/getQuizData";
 import Spinner from "../Components/Spinner";
+import { leaderBoardData } from "../api/leaderboardData/leaderboardData";
 
 const url = `${BASE_URL}/leaderBoard`;
-
-type ServerResponse = {
-  success: boolean;
-  leaderBoard: LeaderBoard;
-};
 
 const LeaderBoardPage = () => {
   const {
@@ -21,30 +14,19 @@ const LeaderBoardPage = () => {
 
   useEffect(() => {
     (async () => {
-      dispatch({ type: " SET_LOADING" });
+      dispatch({ type: "SET_LOADING" });
       try {
-        const response = await axios.get<ServerResponse>(url);
-        if (response.status === 200) {
+        const data = await leaderBoardData(url);
+        if ("leaderBoard" in data) {
           dispatch({
             type: "ADD_TO_LEADERBOARD",
-            payload: { leaderBoard: response.data.leaderBoard },
+            payload: { leaderBoard: data.leaderBoard },
           });
         }
       } catch (error) {
-        if (axios.isAxiosError(error)) {
-          const serverError = error as AxiosError<ServerError>;
-          if (serverError && serverError.response) {
-            return serverError.response.data;
-          }
-        }
         console.log(error);
-        return {
-          success: false,
-          message: "Error while getting the quiz data",
-          errorMessage: "Something went wrong!",
-        };
       }
-      dispatch({ type: " SET_LOADING" });
+      dispatch({ type: "SET_LOADING" });
     })();
   }, [dispatch]);
 
