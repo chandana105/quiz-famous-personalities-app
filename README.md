@@ -16,6 +16,7 @@ Quizzy-Quiz Application is a quiz app made on famous personalities. There are 3 
 - ExpressJS for Network Calls and Middlewares
 - MongoDB for storing documents
 - Mongoose for interacting with MongoDB
+- Unit Tests with JEST
 - Tailwind CSS
 
 ## Features
