@@ -6,7 +6,7 @@ import { BASE_URL } from "../api/helper";
 import { Toast } from "../Components/Toast";
 import * as finalResults from "../api/result/saveResult";
 
-const url = `${BASE_URL}/leaderBoard`;
+const url = `${BASE_URL}leaderBoard`;
 
 const Result = () => {
   const {
